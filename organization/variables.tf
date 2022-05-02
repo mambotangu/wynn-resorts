@@ -5,5 +5,6 @@ variable "org_admin_group" {}
 variable "security_admin_group" {}
 variable "network_admin_group" {}
 variable "auditor_group" {}
-variable "support_admin_group" {}
-variable "org_domain_id" {}
+variable "support_admin_group" {
+
+}
