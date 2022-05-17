@@ -12,7 +12,7 @@ export ADMIN_PROJECT_ID=foundation-workspace-$RANDOM_ID
 export ADMIN_SA="sa-admin-caller"
 #
 # Your GCP ORG ID
-export ORGANIZATION="CHANGE_ME" # Your GCP ORG ID
+export ORGANIZATION="405708060946" # Your GCP ORG ID
 
 
 ##

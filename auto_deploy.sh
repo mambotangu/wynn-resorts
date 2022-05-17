@@ -18,10 +18,8 @@ $(greenprint 's)') Run 1,2,3
 $(yellowprint '1)') Run 1-bootstrap
 $(yellowprint '2)') Run 2-organization
 $(yellowprint '3)') Run 3-shared
-$(yellowprint '4)') Run 4-dev
-$(yellowprint '5)') Run 5-qa
-$(yellowprint '6)') Run 6-uat
-$(yellowprint '7)') Run 7-prod
+$(yellowprint '4)') Run 4-wr
+$(yellowprint '5)') Run 5-wsi
 
 $(redprint '0)') Exit
 Choose an option:  "
@@ -46,29 +44,18 @@ Choose an option:  "
         mainmenu
         ;;
     4)
-        echo "Running dev"
-        run_X_env "4-dev"
-        echo "Completed dev"
+        echo "Running wr"
+        run_X_env "4-wr"
+        echo "Completed wr"
         mainmenu
         ;;
     5)
-        echo "Running qa"
-        run_X_env "5-qa"
-        echo "Completed qa"
+        echo "Running wsi"
+        run_X_env "5-wsi"
+        echo "Completed wsi"
         mainmenu
         ;;
-    6)
-        echo "Running uat"
-        run_X_env "6-uat"
-        echo "Completed uat"
-        mainmenu
-        ;;
-    7)
-        echo "Running prod"
-        run_X_env "7-prod"
-        echo "Completed prod"
-        mainmenu
-        ;;
+    
     s)
         echo "Running setup"
         run_1_bootstrap
@@ -88,21 +75,13 @@ Choose an option:  "
         run_3_shared
         echo "Completed shared"
 
-        echo "Running dev"
-        run_X_env "4-dev"
-        echo "Completed dev"
+        echo "Running wr"
+        run_X_env "4-wr"
+        echo "Completed wr"
 
-        echo "Running qa"
-        run_X_env "5-qa"
-        echo "Completed qa"
-
-        echo "Running uat"
-        run_X_env "6-uat"
-        echo "Completed uat"
-
-        echo "Running prod"
-        run_X_env "7-prod"
-        echo "Completed prod"
+        echo "Running wsi"
+        run_X_env "5-wsi"
+        echo "Completed wsi"
         mainmenu
         ;;
     0)
@@ -270,25 +249,19 @@ fi
 ######
 ## run_X_env
 # Example:
-# $ run_X_env 4-dev
+# $ run_X_env 4-wr
 ######
 run_X_env() {
 
 
 THE_ENV=$1
 case $THE_ENV in
-  4-dev)
-    PREFIX="tf_state_dev"
+  4-wr)
+    PREFIX="tf_state_wr"
     ;;
-  5-qa)
-    PREFIX="tf_state_qa"
+  5-wsi)
+    PREFIX="tf_state_wsi"
     ;;  
-  6-uat)
-    PREFIX="tf_state_uat"
-    ;;
-  7-prod)
-    PREFIX="tf_state_prod"
-    ;;
 esac
 
 THE_FILE="./$THE_ENV/provider.tf"

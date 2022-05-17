@@ -1,67 +1,35 @@
 #!/bin/bash
 clear
 
-destroy_step_7 () {
-  terraform -chdir=7-prod init
-  terraform -chdir=7-prod destroy --auto-approve -var-file=terraform.tfvars
-
-  if [ $? != 0 ]; then
-    echo "Error on step 7"
-    exit 1
-  else
-    echo "Prod resources destroyed. "
-    rm -rf ./7-prod/.terraform*
-  fi
-
-  echo "" > ./7-prod/provider.tf
-  destroy_step_6;
-}
-
-destroy_step_6 () {
-  terraform -chdir=6-uat init
-  terraform -chdir=6-uat destroy --auto-approve -var-file=terraform.tfvars
-
-  if [ $? != 0 ]; then
-    echo "Error on step 6"
-    exit 1
-  else
-    echo "UAT resources destroyed. "
-    rm -rf ./6-uat/.terraform*
-  fi
-
-  echo "" > ./6-uat/provider.tf
-  destroy_step_5
-}
-
 destroy_step_5 () {
-  terraform -chdir=5-qa init
-  terraform -chdir=5-qa destroy --auto-approve -var-file=terraform.tfvars
+  terraform -chdir=5-wsi init
+  terraform -chdir=5-wsi destroy --auto-approve -var-file=terraform.tfvars
 
   if [ $? != 0 ]; then
     echo "Error on step 5"
     exit 1
   else
-    echo "QA resources destroyed. "
-    rm -rf ./5-qa/.terraform*
+    echo "wsi resources destroyed. "
+    rm -rf ./5-wsi/.terraform*
   fi
 
-  echo "" > ./5-qa/provider.tf
-  destroy_step_4
+  echo "" > ./5-wsi/provider.tf
+  destroy_step_4;
 }
 
-destroy_step_4 () {
-  terraform -chdir=4-dev init
-  terraform -chdir=4-dev destroy --auto-approve -var-file=terraform.tfvars
+destroy_step_4() {
+  terraform -chdir=4-wr init
+  terraform -chdir=4-wr destroy --auto-approve -var-file=terraform.tfvars
 
   if [ $? != 0 ]; then
     echo "Error on step 4"
     exit 1
   else
-    echo "Dev resources destroyed. "
-    rm -rf ./4-dev/.terraform*
+    echo "WR resources destroyed. "
+    rm -rf ./4-wr/.terraform*
   fi
 
-  echo "" > ./4-dev/provider.tf
+  echo "" > ./4-wr/provider.tf
   destroy_step_3
 }
 
@@ -143,15 +111,7 @@ destroy_step_0() {
 }
 
 # Determine which step to destroy from
-if [ -z $1 ] || [ $1 == 7 ]; then
-  destroy_step_7;
-fi
-
-if [ $1 == 6 ]; then
-  destroy_step_6;
-fi
-
-if [ $1 == 5 ]; then
+if [ -z $1 ] || [ $1 == 5 ]; then
   destroy_step_5;
 fi
 

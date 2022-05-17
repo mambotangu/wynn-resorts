@@ -5,12 +5,12 @@ clear
 # **Update these variables
 ####
 
-export ADMIN_EMAIL="CHANGE_ME" # The email address of a user with Google Admin access. Typically this is the user deploying the foundation
+export ADMIN_EMAIL="mambo@cf-0004.sadaess.com" # The email address of a user with Google Admin access. Typically this is the user deploying the foundation
 
 # Update these variables per your GCP environment
-export DOMAIN="CHANGE_ME"       # Your User verified Domain for GCP
-export BILLING_ACCT="CHANGE_ME" # Your GCP BILLING ID (SADA Sub-Account or Direct ID);
-export ORGANIZATION="CHANGE_ME" # Your GCP ORG ID
+export DOMAIN="cf-0004.sadaess.com"       # Your User verified Domain for GCP
+export BILLING_ACCT="01C805-AC04C5-836F50" # Your GCP BILLING ID (SADA Sub-Account or Direct ID);
+export ORGANIZATION="405708060946" # Your GCP ORG ID
 export REGION=US-WEST1          # Region to deploy the initial subnets
 export USE_BUS_CODE="FALSE"      # Set to FALSE to remove the Business Code requirement
 export BUS_CODE=zzzz            # The Department code or cost center associated with this Foudnation ; Leave like this if you've set USE_BUS_CODE to FALSE ; 
@@ -249,7 +249,7 @@ EOF
 ######
 ## 4-dev
 ######
-cat <<EOF > ./4-dev/terraform.tfvars
+cat <<EOF > ./4-wr/terraform.tfvars
 billing_account = "$BILLING_ACCT"
 
 ##Groups are created in Google admin and must exist prior to deploying this step.###
@@ -262,7 +262,7 @@ EOF
 ######
 ## 5-qa
 ######
-cat <<EOF > ./5-qa/terraform.tfvars
+cat <<EOF > ./5-wsi/terraform.tfvars
 billing_account = "$BILLING_ACCT"
 
 ##Groups are created in Google admin and must exist prior to deploying this step.###
@@ -270,33 +270,6 @@ admin_group_name     = "$ADMINS"
 developer_group_name = "$DEVELOPERS"
 devops_group_name    = "$DEV_OPS"
 EOF
-
-
-######
-## 6-uat
-######
-cat <<EOF > ./6-uat/terraform.tfvars
-billing_account = "$BILLING_ACCT"
-
-##Groups are created in Google admin and must exist prior to deploying this step.###
-admin_group_name     = "$ADMINS"
-developer_group_name = "$DEVELOPERS"
-devops_group_name    = "$DEV_OPS"
-EOF
-
-
-######
-## 7-prod
-######
-cat <<EOF > ./7-prod/terraform.tfvars
-billing_account ="$BILLING_ACCT"
-
-##Groups are created in Google admin and must exist prior to deploying this step.###
-admin_group_name     = "$ADMINS"
-developer_group_name = "$DEVELOPERS"
-devops_group_name    = "$DEV_OPS"
-EOF
-
 
 echo "Done..."
 echo
